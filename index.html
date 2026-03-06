@@ -11,16 +11,19 @@
   <!-- Preconnect to font origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Non-render-blocking font loading -->
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"
-    media="print" onload="this.media='all'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  </noscript>
+  <!-- Font loaded normally — critical CSS inline prevents render-blocking -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Critical CSS inlined for instant first paint -->
   <style>
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+    }
+
     :root {
       --color-primary: #3b82f6;
       --color-primary-light: #60a5fa;
@@ -34,7 +37,7 @@
       --color-gradient-2: linear-gradient(135deg, #ffe600 0%, #f5a623 100%);
       --color-gradient-hero: linear-gradient(180deg, #0f1629 0%, #132244 50%, #0f1629 100%);
       --radius-lg: 20px;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
       --transition: .3s cubic-bezier(.4, 0, .2, 1)
     }
 
